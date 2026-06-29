@@ -1,16 +1,13 @@
-"""
-WSGI config for django_projects project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
-"""
-
 import os
-
+import sys
 from django.core.wsgi import get_wsgi_application
 
+# 1. Tell Vercel to look inside the outer django_projects folder
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+# 2. Set the settings path 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'django_projects.settings')
 
+# 3. Create the production application callable
 application = get_wsgi_application()
+app = application

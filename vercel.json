@@ -3,14 +3,13 @@
   "builds": [
     {
       "src": "django_projects/django_projects/wsgi.py",
-      "use": "@vercel/python",
-      "config": { "maxDuration": 25 }
+      "use": "@vercel/python"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "django_projects/django_projects/wsgi.py"
+      "dest": "django_projects/django_projects/manage.py"
     }
   ]
 }
