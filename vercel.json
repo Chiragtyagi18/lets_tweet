@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "django_projects/django_projects/wsgi.py",
+      "use": "@vercel/python",
+      "config": { "maxDuration": 25 }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "django_projects/django_projects/wsgi.py"
+    }
+  ]
+}
