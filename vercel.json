@@ -7,14 +7,6 @@
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "django_projects/static/$1"
-    },
-    {
-      "src": "/media/(.*)",
-      "dest": "django_projects/media/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "api/index.py"
     }

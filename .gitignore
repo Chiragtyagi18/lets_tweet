@@ -34,8 +34,8 @@ media/
 Thumbs.db
 desktop.ini
 
-# Static files (collected)
-staticfiles/
+# Static files (collected) - DO NOT ignore, needed for Vercel deployment
+# staticfiles/
 
 # Environment variables
 .env
