@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+{% block title %}TweetApp - Home{% endblock %}
+{% block content %}
+<div class="hero-section">
+    <h1>{% if query %}Search Results{% else %}Welcome to TweetApp{% endif %}</h1>
+    <p>{% if query %}Showing results for "<strong>{{ query }}</strong>"{% else %}Share your thoughts with the world{% endif %}</p>
+</div>
+{% if query %}
+<div class="search-results-header">
+    <h5>Results for <span>"{{ query }}"</span></h5>
+    <span class="result-count">{{ tweets|length }} tweet{{ tweets|length|pluralize }}</span>
+</div>
+{% endif %}
+{% if tweets %}
+<div class="tweets-grid">
+    {% for tweet in tweets %}
+    <div class="tweet-card">
+        <div class="tweet-header">
+            <div class="tweet-avatar">{{ tweet.user.username|first|upper }}</div>
+            <div>
+                <div class="tweet-username">{{ tweet.user.username }}</div>
+                <div class="tweet-time">{{ tweet.created_at|timesince }} ago</div>
+            </div>
+        </div>
+        {% if tweet.image %}
+        <img src="{{ tweet.image.url }}" class="tweet-image" alt="Tweet Image">
+        {% endif %}
+        <div class="tweet-text">{{ tweet.text }}</div>
+        {% if tweet.user == user %}
+        <div class="tweet-actions">
+            <a href="{% url 'tweet_edit' tweet.id %}" class="btn btn-outline-custom"><i class="bi bi-pencil"></i> Edit</a>
+            <a href="{% url 'tweet_delete' tweet.id %}" class="btn btn-danger-custom"><i class="bi bi-trash"></i> Delete</a>
+        </div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div class="empty-state">
+    <div class="empty-icon"><i class="bi bi-chat-dots"></i></div>
+    <h3>{% if query %}No tweets found{% else %}No tweets yet{% endif %}</h3>
+    <p>{% if query %}Try searching with different keywords{% else %}Be the first to share something!{% endif %}</p>
+    {% if not query and user.is_authenticated %}
+    <a href="{% url 'tweet_create' %}" class="btn btn-primary-custom"><i class="bi bi-plus-circle"></i> Create Tweet</a>
+    {% endif %}
+</div>
+{% endif %}
+{% endblock %}
