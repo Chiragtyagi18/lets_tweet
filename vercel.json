@@ -8,8 +8,16 @@
   ],
   "routes": [
     {
+      "src": "/static/(.*)",
+      "dest": "django_projects/static/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "django_projects/media/$1"
+    },
+    {
       "src": "/(.*)",
-      "dest": "django_projects/django_projects/manage.py"
+      "dest": "django_projects/django_projects/wsgi.py"
     }
   ]
 }
